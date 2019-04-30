@@ -38,26 +38,52 @@ public class Quick {
 
     public static int divide(int[] ints, int start, int end) {
 
-        int num = ints[start];
-        int i = start + 1;
-        int j = end;
-        while (i <= j) {
-            if (ints[i] > num) {
-                if (ints[j] < num) {
-                    int temp = ints[i];
-                    ints[i] = ints[j];
-                    ints[j] = temp;
-                    i++;
+//        int num = ints[start];
+//        int i = start + 1;
+//        int j = end;
+//        while (i <= j) {
+//            if (ints[i] > num) {
+//                if (ints[j] < num) {
+//                    int temp = ints[i];
+//                    ints[i] = ints[j];
+//                    ints[j] = temp;
+//                    i++;
+//                }
+//                j--;
+//            } else {
+//                i++;
+//            }
+//        }
+//        int temp = ints[start];
+//        ints[start] = ints[i - 1];
+//        ints[i - 1] = temp;
+//        return i - 1;
+        int i = start + 1, j = end;
+        int v = ints[start];
+        while(true) {
+            while (ints[i] < v) {
+                if(i == end) {
+                    break;
                 }
-                j--;
-            } else {
                 i++;
             }
+            while (ints[j] > v) {
+                if(j == start) {
+                    break;
+                }
+                j--;
+            }
+            if(i >= j) {
+                break;
+            }
+            int temp = ints[i];
+            ints[i] = ints[j];
+            ints[j] = temp;
         }
         int temp = ints[start];
-        ints[start] = ints[i - 1];
-        ints[i - 1] = temp;
-        return i - 1;
+        ints[start] = ints[j];
+        ints[j] = temp;
+        return j;
     }
 
 

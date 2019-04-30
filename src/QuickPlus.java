@@ -22,13 +22,6 @@ public class QuickPlus {
         Calendar calendar1 = Calendar.getInstance();
         System.out.println(calendar1.getTimeInMillis() - calendar.getTimeInMillis() + "ms");
 
-
-        Calendar calendar2 = Calendar.getInstance();
-        Quick.sort(ints, 0, ints.length - 1);
-        Calendar calendar3 = Calendar.getInstance();
-        System.out.println(calendar3.getTimeInMillis() - calendar2.getTimeInMillis() + "ms");
-
-
         for (int i = 0; i < ints.length - 1; i++) {
             if (ints[i] > ints[i + 1]) {
                 System.out.println(ints[i] + "," + ints[i + 1]);
@@ -74,26 +67,30 @@ public class QuickPlus {
 
     public static int divide(int[] ints, int start, int end) {
 
-        int num = ints[start];
-        int i = start + 1;
-        int j = end;
-        while (i <= j) {
-            if (ints[i] > num) {
-                if (ints[j] < num) {
-                    int temp = ints[i];
-                    ints[i] = ints[j];
-                    ints[j] = temp;
-                    i++;
+        int i = start, j = end + 1;
+        int v = ints[start];
+        while(true) {
+            while (ints[++i] < v) {
+                if(i == end) {
+                    break;
                 }
-                j--;
-            } else {
-                i++;
             }
+            while (ints[--j] > v) {
+                if(j == start) {
+                    break;
+                }
+            }
+            if(i >= j) {
+                break;
+            }
+            int temp = ints[i];
+            ints[i] = ints[j];
+            ints[j] = temp;
         }
         int temp = ints[start];
-        ints[start] = ints[i - 1];
-        ints[i - 1] = temp;
-        return i - 1;
+        ints[start] = ints[j];
+        ints[j] = temp;
+        return j;
     }
 
 
